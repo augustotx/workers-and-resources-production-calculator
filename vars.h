@@ -1,66 +1,58 @@
-// Factories
-struct factory
-{
-    // INPUTS
+#define RESOURCE_FACTOR 2
+#define RESOURCE_COUNT 41
+#define FACTORY_SIZE 43
 
-    // Aggregates
-    double gravel;
-    double stone;
-    double coal;
-    double coal_ore;
-    double iron;
-    double iron_ore;
-    double bauxite;
-    double bauxite_ore;
-    double uranium_ore;
+/* RESOURCE LIST/ARRAY
+// Aggregates
+0     gravel;
+1     stone;
+2     coal;
+3     coal_ore;
+4     iron;
+5     iron_ore;
+6     bauxite;
+7     bauxite_ore;
+8     uranium_ore;
 
     // Open Storage
-    double steel;
-    double prefab;
-    double brick;
-    double wood;
-    double board;
-    double aluminium;
-    double uranium_oxide;
+9     steel;
+10     prefab;
+11     brick;
+12     wood;
+13     board;
+14     aluminium;
+15     uranium_oxide;
 
     // Warehouse
-    double crops;
-    double chemicals;
-    double fabric;
-    double clothes;
-    double alcohol;
-    double food;
-    double plastics;
-    double mechanical_components;
-    double electronic_components;
-    double electronics;
+16     crops;
+17     chemicals;
+18     fabric;
+19     clothes;
+20     alcohol;
+21     food;
+22     plastics;
+23     mechanical_components;
+24     electronic_components;
+25     electronics;
 
     // Liquids
-    double oil;
-    double fuel;
-    double bitumen;
+26     oil;
+27     fuel;
+28     bitumen;
 
     // Other
-    double aluminium_oxide;
-    double asphalt;
-    double cement;
-    double concrete;
-    double livestock;
-    double meat;
-    double nuclear_fuel;
-    double nuclear_waste;
-    double uf6;
+29     aluminium_oxide;
+30     asphalt;
+31     cement;
+32     concrete;
+33     livestock;
+34     meat;
+35     nuclear_fuel;
+36     nuclear_waste;
+37     uf6;
 
     // Specific inputs
-    int workers;
-    double power;
-    double water;
-
-    // OUTPUTS
-    double output;
-    double output2;
-    double sewage;
-
-    // PROPERTIES
-    int pollution; // 1 = true, 0 = false
-};
+38     workers;
+39     power;
+40     water;
+*/

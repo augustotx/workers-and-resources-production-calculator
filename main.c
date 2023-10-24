@@ -1,8 +1,19 @@
 #include <stdio.h>
+#include <stdlib.h>
+#include "func.h"
 #include "vars.h"
+
 int main()
 {
     // Global variables
+    
+    // list in vars.h
+    double resources[FACTORY_SIZE];
+    zerofact(resources);
+
+    char *resourceNames[FACTORY_SIZE][64];
+    define_resource_names(resourceNames);
+    
     int worker_population = 0;
     double power_consumption = 0.0;
 
@@ -22,22 +33,16 @@ int main()
 
     // This one I got from here (https://www.reddit.com/r/Workers_And_Resources/comments/ka2ael/worker_resource_consumption_and_population_growth/)
     double worker_alcohol = 0.01;
-
-    // Production values
-    struct factory prod_values;
-    zerofact(prod_values);
     
-
-    // Declare an array factory types
-    struct factory factories[64];
-
-    for (int i = 0; i < 64; i++)
+    double factories[FACTORY_SIZE][FACTORY_SIZE];
+    for (int i = 0; i < FACTORY_SIZE; i++)
     {
-        initfact(&factories[i],i);
+        initfact(resources,i,factories[i]);
     }
     
+
     // Actual user program
     printf("todo welcome message\n");
-    calculate(factories,&worker_population,&power_consumption,&worker_food,&worker_meat,&worker_clothes,&worker_electronics,&worker_alcohol,&prod_values);
+    calculate(resourceNames,resources,factories[21],1); // 1 food factory and its needs
     return 0;
 }
