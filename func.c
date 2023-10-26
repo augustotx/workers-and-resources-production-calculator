@@ -231,8 +231,9 @@ int checkratio(double *ratio)
     return 0;
 }
 
-int calculate(struct factory *factory, double amount, struct factory *resource_pool, double *factory_count, char resourceNames[][64], int *worker_population)
+int calculate(struct factory *factory, double amount, struct factory *resource_pool, double *factory_count, char resourceNames[][64], int *worker_population, double *sewage)
 {
+    *sewage += factory->inputs[39];
     for (int i = 0; i < RESOURCE_COUNT; i++)
     {
         resource_pool->inputs[i] -= factory->inputs[i] * amount;
@@ -255,7 +256,7 @@ int calculate(struct factory *factory, double amount, struct factory *resource_p
         newfactory(recursive_factory, i);
         while (resource_pool->inputs[i] < 0.0)
         {
-            calculate(recursive_factory, 1.0, resource_pool, factory_count, resourceNames, worker_population);
+            calculate(recursive_factory, 1.0, resource_pool, factory_count, resourceNames, worker_population,sewage);
         }
         free(recursive_factory);
     }
@@ -263,7 +264,7 @@ int calculate(struct factory *factory, double amount, struct factory *resource_p
     return 0;
 }
 
-int results(struct factory *resource_pool, double *factory_count, char resourceNames[][64], int *worker_population)
+int results(struct factory *resource_pool, double *factory_count, char resourceNames[][64], int *worker_population, double *sewage)
 {
     printf("Remaining resources from factories (able to export):\n\n");
     for (int i = 0; i < RESOURCE_COUNT; i++)
@@ -275,7 +276,7 @@ int results(struct factory *resource_pool, double *factory_count, char resourceN
     }
     if (resource_pool->inputs[39] > 0.0)
     {
-        printf("\nIndustry-made sewage to take care of: %f\n", resource_pool->inputs[39]);
+        printf("\nIndustry-made sewage to take care of: %f\n",*sewage);
     }
     printf("\nWorkers needed: %d\n", *worker_population * 3);
     printf("\n");

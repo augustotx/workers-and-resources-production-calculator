@@ -1,6 +1,8 @@
 # Workers and Resources Production Calculator
 Production Calculator for the game Workers and Resources: Soviet Republic programmed in C.
 
+Honestly, I don't even know if this program is correct, but I hope it is lol
+
 # How to run it
 To run it, compile it with GCC and run the executable. There's a Linux build script which you can modify for your own uses.
 
@@ -38,12 +40,26 @@ wood:
 crops:
   Amount: 0.680000
   Factory Count: 53.000000
-[... so on and so on ...]
+chemicals:
+  Amount: 0.310000
+  Factory Count: 1.000000
+food:
+  Amount: 20.000000
+  Factory Count: 1.000000
+oil:
+  Amount: 0.800000
+  Factory Count: 36.000000
+fuel:
+  Amount: 43.500000
+  Factory Count: 1.000000
+bitumen:
+  Amount: 75.000000
+  Factory Count: 1.000000
 water:
   Amount: 181.500000
   Factory Count: 1.000000
 
-Industry-made sewage to take care of: 181.500000
+Industry-made sewage to take care of: 18.500000
 
 Workers needed: 2370
 ```

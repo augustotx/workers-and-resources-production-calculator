@@ -7,6 +7,8 @@
 int main()
 {
     // Global variables
+    double *sewage = malloc(sizeof(double));
+    *sewage = 0.0;
 
     // list in vars.h
     struct factory *resource_pool = malloc(sizeof(struct factory));
@@ -56,10 +58,11 @@ int main()
     printf("\n");
     
     newfactory(factory, type);
-    calculate(factory, amount, resource_pool, factory_count, resourceNames, &worker_population);
-    results(resource_pool, factory_count, resourceNames, &worker_population);
+    calculate(factory, amount, resource_pool, factory_count, resourceNames, &worker_population,sewage);
+    results(resource_pool, factory_count, resourceNames, &worker_population,sewage);
     free(factory);
     free(resource_pool);
+    free(sewage);
 
     return 0;
 }
