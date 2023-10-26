@@ -37,7 +37,7 @@ int main()
     double worker_alcohol = 0.01;
 
     // Actual user program
-    printf("todo welcome message\n");
+    printf("Welcome to the calculator, comrade!\nReady to build your republic?\n");
     
     struct factory *factory = malloc(sizeof(struct factory));
     
