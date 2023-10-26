@@ -14,12 +14,12 @@ struct factory
 // Aggregates
 0     gravel;
 1     stone;
-2     coal;
-3     coal_ore;
-4     iron;
-5     iron_ore;
-6     bauxite;
-7     bauxite_ore;
+2     coal ore;
+3     coal;
+4     iron ore;
+5     iron;
+6     bauxite_ore;
+7     bauxite;
 8     uranium_ore;
 
     // Open Storage

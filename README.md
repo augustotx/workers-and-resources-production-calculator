@@ -8,9 +8,11 @@ To run it, compile it with GCC and run the executable. There's a Linux build scr
 The code is free and open source. You can download it, run it, modify it and redistribute it (GPLv3). Just credit me if you make a fork, ok?
 
 # Stuff I haven't done yet
-Right now the only production chain able to be calculated is food. You can calculate water as well, for example, because it's interlaced with food, but the objective is to put every factory in the game in this algorithm to actually have it compute everything from scratch.
+Right now the production chains I've tested to work are food and steel. You can calculate water or chemicals or wood as well, for example, because they're in the food production, but the objective is to put every factory in the game in this algorithm to actually have it compute everything from scratch.
 
-I don't know yet if I want to put stuff like nuclear of vehicle production chains in here right now because those are rather complex. I want to focus more on the normal factories (coal, iron, food, electronics, clothes, etc).
+I don't know yet if I want to put stuff like nuclear or vehicle production chains in here right now because those are rather complex. I want to focus more on the normal factories (coal, iron, food, electronics, clothes, etc) and then put in the complex stuff.
+
+After all that is done, I want to calculate if the production chain is enough for the amount of workers it requires (e.g. if food production sustains the workers it requires and if there's anything remaining).
 
 # Example output
 ```

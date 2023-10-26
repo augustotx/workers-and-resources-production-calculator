@@ -18,12 +18,11 @@ int input(char *text, char *str, int max_len)
                 str[i] = '\0';
             }
         }
-        
+
         return 1;
     }
     return 0;
 }
-
 
 int define_resource_names(char resourceNames[][64])
 {
@@ -33,11 +32,14 @@ int define_resource_names(char resourceNames[][64])
     }
     strcpy(resourceNames[0], "gravel");
     strcpy(resourceNames[1], "stone");
-    strcpy(resourceNames[2], "coal");
-    strcpy(resourceNames[3], "coal ore");
-    strcpy(resourceNames[4], "iron");
-    strcpy(resourceNames[5], "iron ore");
+    strcpy(resourceNames[2], "coal ore");
+    strcpy(resourceNames[3], "coal");
+    strcpy(resourceNames[4], "iron ore");
+    strcpy(resourceNames[5], "iron");
     strcpy(resourceNames[6], "raw bauxite");
+    strcpy(resourceNames[7], "bauxite");
+    strcpy(resourceNames[8], "uranium ore");
+    strcpy(resourceNames[9], "steel");
     strcpy(resourceNames[12], "wood");
     strcpy(resourceNames[16], "crops");
     strcpy(resourceNames[17], "chemicals");
@@ -68,14 +70,14 @@ int strcompare(char *str1, char *str2)
 int get_factory_type(char resourceNames[][64])
 {
     char *buffer = malloc(64 * sizeof(char));
-    input("Choose a factory type: (e.g. gravel, food, electronic components, etc)\n-> ",buffer,64);
+    input("Choose a factory type: (e.g. gravel, food, electronic components, etc)\n-> ", buffer, 64);
     for (int i = 0; i < RESOURCE_COUNT; i++)
     {
-        if(strlen(resourceNames[i]) == 0)
+        if (strlen(resourceNames[i]) == 0)
         {
             continue;
         }
-        if(strcompare(resourceNames[i],buffer))
+        if (strcompare(resourceNames[i], buffer))
         {
             free(buffer);
             return i;
@@ -103,7 +105,7 @@ int newfactory(struct factory *factory, int factoryType)
     {
         factoryType = 27; // bitumen factory = fuel factory
     }
-    
+
     switch (factoryType)
     {
     case 0:
@@ -117,6 +119,55 @@ int newfactory(struct factory *factory, int factoryType)
         factory->outputs[factoryType] = 140.0; // stone/day
 
         factory->inputs[27] = 0.5; // fuel estimate consumption
+        break;
+    case 2:
+        factory->outputs[factoryType] = 924.0; // coal ore mine at 100% capacity/day
+
+        factory->workers = 220;
+        break;
+    case 3:
+        factory->outputs[factoryType] = 120.0; // coal/day
+
+        factory->inputs[2] = 210.0;
+
+        factory->workers = 15;
+        break;
+    case 4:
+        factory->outputs[factoryType] = 1000.0; // iron ore mine at 100% capacity/day
+
+        factory->workers = 250;
+        break;
+    case 5:
+        factory->outputs[factoryType] = 105.0; // iron/day
+
+        factory->inputs[4] = 225.0;
+
+        factory->workers = 15;
+        break;
+    case 6:
+        factory->outputs[factoryType] = 22.5; // raw bauxite/day (i still have to check vehicle performance compared to workers)
+
+        factory->workers = 45;
+        break;
+    case 7:
+        factory->outputs[factoryType] = 75.0; // bauxite/day
+
+        factory->inputs[6] = 125.0;
+
+        factory->workers = 25;
+        break;
+    case 8:
+        factory->outputs[factoryType] = 75.0; // uranium ore/day
+
+        factory->workers = 100;
+        break;
+    case 9:
+        factory->outputs[factoryType] = 43.0; // steel/day
+
+        factory->inputs[3] = 375.0;
+        factory->inputs[5] = 200.0;
+
+        factory->workers = 500;
         break;
     case 12:
         factory->outputs[factoryType] = 189.0; // wood/day
@@ -180,19 +231,19 @@ int checkratio(double *ratio)
     return 0;
 }
 
-int calculate(struct factory *factory,double amount,struct factory *resource_pool,double *factory_count, char resourceNames[][64], int *worker_population)
+int calculate(struct factory *factory, double amount, struct factory *resource_pool, double *factory_count, char resourceNames[][64], int *worker_population)
 {
     for (int i = 0; i < RESOURCE_COUNT; i++)
     {
         resource_pool->inputs[i] -= factory->inputs[i] * amount;
         resource_pool->inputs[i] += factory->outputs[i] * amount;
-        if(factory->outputs[i] > 0.0)
+        if (factory->outputs[i] > 0.0)
         {
             factory_count[i] += 1.0 * amount;
         }
     }
     *worker_population += factory->workers;
-    
+
     for (int i = 0; i < RESOURCE_COUNT; i++)
     {
         if (resource_pool->inputs[i] >= 0.0)
@@ -200,11 +251,11 @@ int calculate(struct factory *factory,double amount,struct factory *resource_poo
             continue;
         }
         struct factory *recursive_factory = malloc(sizeof(struct factory));
-        
-        newfactory(recursive_factory,i);
+
+        newfactory(recursive_factory, i);
         while (resource_pool->inputs[i] < 0.0)
         {
-            calculate(recursive_factory,1.0,resource_pool,factory_count,resourceNames,worker_population);
+            calculate(recursive_factory, 1.0, resource_pool, factory_count, resourceNames, worker_population);
         }
         free(recursive_factory);
     }
@@ -212,21 +263,21 @@ int calculate(struct factory *factory,double amount,struct factory *resource_poo
     return 0;
 }
 
-int results(struct factory *resource_pool,double *factory_count,char resourceNames[][64], int *worker_population)
+int results(struct factory *resource_pool, double *factory_count, char resourceNames[][64], int *worker_population)
 {
     printf("Remaining resources from factories (able to export):\n\n");
     for (int i = 0; i < RESOURCE_COUNT; i++)
     {
         if (resource_pool->inputs[i] != 0.0)
         {
-            printf("%s:\n  Amount: %f\n  Factory Count: %f\n",resourceNames[i],resource_pool->inputs[i],factory_count[i]);
-        }   
+            printf("%s:\n  Amount: %f\n  Factory Count: %f\n", resourceNames[i], resource_pool->inputs[i], factory_count[i]);
+        }
     }
     if (resource_pool->inputs[39] > 0.0)
     {
-        printf("\nIndustry-made sewage to take care of: %f\n",resource_pool->inputs[39]);
+        printf("\nIndustry-made sewage to take care of: %f\n", resource_pool->inputs[39]);
     }
-    printf("\nWorkers needed: %d\n",*worker_population * 3);
+    printf("\nWorkers needed: %d\n", *worker_population * 3);
     printf("\n");
     return 0;
 }
