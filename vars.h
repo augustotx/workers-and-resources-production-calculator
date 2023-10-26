@@ -1,6 +1,14 @@
-#define RESOURCE_FACTOR 2
-#define RESOURCE_COUNT 41
-#define FACTORY_SIZE 43
+#ifndef VARS_H
+#define VARS_H
+#define RESOURCE_COUNT 40
+
+struct factory
+{
+    double inputs[RESOURCE_COUNT];
+    double outputs[RESOURCE_COUNT];
+    int workers;
+};
+#endif
 
 /* RESOURCE LIST/ARRAY
 // Aggregates
@@ -52,7 +60,7 @@
 37     uf6;
 
     // Specific inputs
-38     workers;
-39     power;
-40     water;
+38     power;
+39     water;
+40     workers;
 */
