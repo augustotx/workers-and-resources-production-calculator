@@ -4,7 +4,9 @@ Production Calculator for the game Workers and Resources: Soviet Republic progra
 Honestly, I don't even know if this program is correct, but I hope it is lol
 
 # How to run it
-To run it, compile it with GCC and run the executable. There's a Linux build script which you can modify for your own uses.
+To run it, compile it with GCC and run the executable. There's a build script which you can modify for your own uses.
+
+You can also just download it from the releases tab, but I wouldn't recommend it because I pretend to change it all the time, and I don't really know much about releases on github.
 
 # License
 The code is free and open source. You can download it, run it, modify it and redistribute it (GPLv3). Just credit me if you make a fork, ok?
