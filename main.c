@@ -19,6 +19,7 @@ int main()
     define_resource_names(resourceNames);
 
     int worker_population = 0;
+    int university_worker_population = 0;
     double power_consumption = 0.0;
 
     // CONSUMPTION PER WORKER PER YEAR
@@ -40,26 +41,48 @@ int main()
 
     // Actual user program
     printf("Welcome to the calculator, comrade!\nReady to build your republic?\n");
-    
+
     struct factory *factory = malloc(sizeof(struct factory));
-    
-    int type = get_factory_type(resourceNames);
-    if (type == -1)
+
+    int type;
+    while (1)
     {
-        printf("No factory type with that name.\n");
-        return 1;
+        type = get_factory_type(resourceNames);
+        if (type == -1)
+        {
+            printf("No factory type with that name.\n");
+            continue;
+        }
+        if (type == -2)
+        {
+
+            printf("Factory Types:\n");
+            for (int i = 0; i < RESOURCE_COUNT; i++)
+            {
+                printf("%d/40 - %s\n", i+1,resourceNames[i]);
+            }
+            continue;
+        }
+        break;
     }
-    
+    double amount;
     char *str = malloc(15 * sizeof(char));
     char *endptr;
-    input("\nType in the amount of factories you want to account for.\n-> ", str, 15);
-    double amount = strtod(str, &endptr);
+    while (1)
+    {
+        input("\nType in the amount of factories you want to account for.\n-> ", str, 15);
+        amount = strtod(str, &endptr);
+        if (amount > 0.0)
+        {
+            break;
+        }
+        printf("\nType in a valid amount (bigger than 0)\n");
+    }
     free(str);
-    printf("\n");
-    
+
     newfactory(factory, type);
-    calculate(factory, amount, resource_pool, factory_count, resourceNames, &worker_population,sewage);
-    results(resource_pool, factory_count, resourceNames, &worker_population,sewage);
+    calculate(factory, amount, resource_pool, factory_count, resourceNames, &worker_population, &university_worker_population, sewage);
+    results(resource_pool, factory_count, resourceNames, &worker_population, &university_worker_population, sewage);
     free(factory);
     free(resource_pool);
     free(sewage);

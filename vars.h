@@ -7,6 +7,7 @@ struct factory
     double inputs[RESOURCE_COUNT];
     double outputs[RESOURCE_COUNT];
     int workers;
+    int university_workers;
 };
 #endif
 
@@ -62,5 +63,4 @@ struct factory
     // Specific inputs
 38     power;
 39     water;
-40     workers;
 */
