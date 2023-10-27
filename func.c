@@ -30,46 +30,46 @@ int define_resource_names(char resourceNames[][64])
     {
         sprintf(resourceNames[i], "UNNAMED ID#%d", i);
     }
-    strcpy(resourceNames[0], "gravel");
-    strcpy(resourceNames[1], "stone");
-    strcpy(resourceNames[2], "coal ore");
-    strcpy(resourceNames[3], "coal");
-    strcpy(resourceNames[4], "iron ore");
-    strcpy(resourceNames[5], "iron");
-    strcpy(resourceNames[6], "raw bauxite");
-    strcpy(resourceNames[7], "bauxite");
-    strcpy(resourceNames[8], "uranium ore");
-    strcpy(resourceNames[9], "steel");
-    strcpy(resourceNames[10], "prefabs");
-    strcpy(resourceNames[11], "bricks");
-    strcpy(resourceNames[12], "wood");
-    strcpy(resourceNames[13], "board");
-    strcpy(resourceNames[14], "aluminium");
-    strcpy(resourceNames[15], "uranium oxide");
-    strcpy(resourceNames[16], "crops");
-    strcpy(resourceNames[17], "chemicals");
-    strcpy(resourceNames[18], "fabric");
-    strcpy(resourceNames[19], "clothes");
-    strcpy(resourceNames[20], "alcohol");
-    strcpy(resourceNames[21], "food");
-    strcpy(resourceNames[22], "plastics");
-    strcpy(resourceNames[23], "mechanical components");
-    strcpy(resourceNames[24], "electronic components");
-    strcpy(resourceNames[25], "electronics");
-    strcpy(resourceNames[26], "oil");
-    strcpy(resourceNames[27], "fuel");
-    strcpy(resourceNames[28], "bitumen");
-    strcpy(resourceNames[29], "aluminium oxide");
-    strcpy(resourceNames[30], "asphalt");
-    strcpy(resourceNames[31], "cement");
-    strcpy(resourceNames[32], "concrete");
-    strcpy(resourceNames[33], "livestock");
-    strcpy(resourceNames[34], "meat");
-    strcpy(resourceNames[35], "nuclear fuel");
-    strcpy(resourceNames[36], "nuclear waste (there's no waste factory)");
-    strcpy(resourceNames[37], "uf6");
-    strcpy(resourceNames[38], "power (not available yet)");
-    strcpy(resourceNames[39], "water");
+    strcpy(resourceNames[gravel], "gravel");
+    strcpy(resourceNames[stone], "stone");
+    strcpy(resourceNames[coal_ore], "coal ore");
+    strcpy(resourceNames[coal], "coal");
+    strcpy(resourceNames[iron_ore], "iron ore");
+    strcpy(resourceNames[iron], "iron");
+    strcpy(resourceNames[bauxite_ore], "raw bauxite");
+    strcpy(resourceNames[bauxite], "bauxite");
+    strcpy(resourceNames[uranium_ore], "uranium ore");
+    strcpy(resourceNames[mechanical_components], "steel");
+    strcpy(resourceNames[prefab], "prefabs");
+    strcpy(resourceNames[brick], "bricks");
+    strcpy(resourceNames[wood], "wood");
+    strcpy(resourceNames[board], "boards");
+    strcpy(resourceNames[aluminium], "aluminium");
+    strcpy(resourceNames[uranium_oxide], "uranium oxide");
+    strcpy(resourceNames[crops], "crops");
+    strcpy(resourceNames[chemicals], "chemicals");
+    strcpy(resourceNames[fabric], "fabric");
+    strcpy(resourceNames[clothes], "clothes");
+    strcpy(resourceNames[alcohol], "alcohol");
+    strcpy(resourceNames[food], "food");
+    strcpy(resourceNames[plastics], "plastics");
+    strcpy(resourceNames[mechanical_components], "mechanical components");
+    strcpy(resourceNames[electronic_components], "electronic components");
+    strcpy(resourceNames[electronics], "electronics");
+    strcpy(resourceNames[oil], "oil");
+    strcpy(resourceNames[fuel], "fuel");
+    strcpy(resourceNames[bitumen], "bitumen");
+    strcpy(resourceNames[aluminium_oxide], "aluminium oxide");
+    strcpy(resourceNames[asphalt], "asphalt");
+    strcpy(resourceNames[cement], "cement");
+    strcpy(resourceNames[concrete], "concrete");
+    strcpy(resourceNames[livestock], "livestock");
+    strcpy(resourceNames[meat], "meat");
+    strcpy(resourceNames[nuclear_fuel], "nuclear fuel");
+    strcpy(resourceNames[nuclear_waste], "nuclear waste (there's no waste factory)");
+    strcpy(resourceNames[uf6], "uf6");
+    strcpy(resourceNames[power], "power (not available yet)");
+    strcpy(resourceNames[water], "water");
     return 0;
 }
 
@@ -92,12 +92,16 @@ int strcompare(char *str1, char *str2)
 int get_factory_type(char resourceNames[][64])
 {
     char *buffer = malloc(64 * sizeof(char));
-    char *list = malloc(64 * sizeof(char));
-    strcpy(list, "list");
+    char *str_list = malloc(64 * sizeof(char));
+    strcpy(str_list, "list");
     input("Choose a factory type: (type in \"list\" to see options)\n-> ", buffer, 64);
-    if (strcompare(buffer, list))
+    enum resource_ids ret_value = none;
+    if (strcompare(buffer, str_list))
     {
-        return -2;
+        ret_value = list;
+        free(buffer);
+        free(str_list);
+        return ret_value;
     }
     for (int i = 0; i < RESOURCE_COUNT; i++)
     {
@@ -107,15 +111,12 @@ int get_factory_type(char resourceNames[][64])
         }
         if (strcompare(resourceNames[i], buffer))
         {
-            free(list);
-            free(buffer);
-            return i;
+            ret_value = i;
         }
     }
-
     free(buffer);
-    free(list);
-    return -1;
+    free(str_list);
+    return ret_value;
 }
 
 int zerofactory(struct factory *factory)
@@ -133,291 +134,287 @@ int zerofactory(struct factory *factory)
 int newfactory(struct factory *factory, int factoryType)
 {
     zerofactory(factory);
-    if (factoryType == 28)
-    {
-        factoryType = 27; // bitumen factory = fuel factory
-    }
 
     switch (factoryType)
     {
-    case 0:
-        factory->outputs[factoryType] = 82.0; // gravel/day
+    case gravel:
+        factory->outputs[gravel] = 82.0; // gravel/day
 
-        factory->inputs[1] = 120.0; // stone
+        factory->inputs[stone] = 120.0; // stone
 
         factory->workers = 15;
         break;
-    case 1:
-        factory->outputs[factoryType] = 140.0; // stone/day
+    case stone:
+        factory->outputs[stone] = 140.0; // stone/day
 
-        factory->inputs[27] = 0.5; // fuel estimate consumption
+        factory->inputs[fuel] = 0.5; // fuel estimate consumption
         break;
-    case 2:
-        factory->outputs[factoryType] = 924.0; // coal ore mine at 100% capacity/day
+    case coal_ore:
+        factory->outputs[coal_ore] = 924.0; // coal ore mine at 100% capacity/day
 
         factory->workers = 220;
         break;
-    case 3:
-        factory->outputs[factoryType] = 120.0; // coal/day
+    case coal:
+        factory->outputs[coal] = 120.0; // coal/day
 
-        factory->inputs[2] = 210.0;
+        factory->inputs[coal_ore] = 210.0;
 
         factory->workers = 15;
         break;
-    case 4:
-        factory->outputs[factoryType] = 1000.0; // iron ore mine at 100% capacity/day
+    case iron_ore:
+        factory->outputs[iron_ore] = 1000.0; // iron ore mine at 100% capacity/day
 
         factory->workers = 250;
         break;
-    case 5:
-        factory->outputs[factoryType] = 105.0; // iron/day
+    case iron:
+        factory->outputs[iron] = 105.0; // iron/day
 
-        factory->inputs[4] = 225.0;
+        factory->inputs[iron_ore] = 225.0;
 
         factory->workers = 15;
         break;
-    case 6:
-        factory->outputs[factoryType] = 22.5; // raw bauxite/day (i still have to check vehicle performance compared to workers)
+    case bauxite_ore:
+        factory->outputs[bauxite_ore] = 22.5; // raw bauxite/day (i still have to check vehicle performance compared to workers)
 
         factory->workers = 45;
         break;
-    case 7:
-        factory->outputs[factoryType] = 75.0; // bauxite/day
+    case bauxite:
+        factory->outputs[bauxite] = 75.0; // bauxite/day
 
-        factory->inputs[6] = 125.0;
+        factory->inputs[bauxite_ore] = 125.0;
 
         factory->workers = 25;
         break;
-    case 8:
-        factory->outputs[factoryType] = 75.0; // uranium ore/day
+    case uranium_ore:
+        factory->outputs[uranium_ore] = 75.0; // uranium ore/day
 
         factory->workers = 100;
         break;
-    case 9:
-        factory->outputs[factoryType] = 43.0; // steel/day
+    case steel:
+        factory->outputs[steel] = 43.0; // steel/day
 
-        factory->inputs[3] = 375.0;
-        factory->inputs[5] = 200.0;
+        factory->inputs[coal] = 375.0;
+        factory->inputs[iron] = 200.0;
 
         factory->workers = 500;
         break;
-    case 10:
-        factory->outputs[factoryType] = 71.0; // prefabs/day
+    case prefab:
+        factory->outputs[prefab] = 71.0; // prefabs/day
 
-        factory->inputs[0] = 65.0;
-        factory->inputs[31] = 9.8;
+        factory->inputs[gravel] = 65.0;
+        factory->inputs[cement] = 9.8;
 
         factory->workers = 65;
         break;
-    case 11:
-        factory->outputs[factoryType] = 51.0; // bricks/day
+    case brick:
+        factory->outputs[brick] = 51.0; // bricks/day
 
-        factory->inputs[3] = 33.0;
+        factory->inputs[coal] = 33.0;
 
         factory->workers = 75;
         break;
-    case 12:
-        factory->outputs[factoryType] = 189.0; // wood/day
+    case wood:
+        factory->outputs[wood] = 189.0; // wood/day
 
-        factory->inputs[27] = 1.5; // 3 vehicles estimate consumption
+        factory->inputs[fuel] = 1.5; // 3 vehicles estimate consumption
 
         factory->workers = 30;
         break;
-    case 13:
-        factory->outputs[factoryType] = 140.0; // boards/day
+    case board:
+        factory->outputs[board] = 140.0; // boards/day
 
-        factory->inputs[12] = 180.0;
+        factory->inputs[wood] = 180.0;
 
         factory->workers = 20;
         break;
-    case 14:
-        factory->outputs[factoryType] = 30.0; // aluminium/day
+    case aluminium:
+        factory->outputs[aluminium] = 30.0; // aluminium/day
 
-        factory->inputs[29] = 52.0;
-        factory->inputs[17] = 2.5;
+        factory->inputs[aluminium_oxide] = 52.0;
+        factory->inputs[chemicals] = 2.5;
 
         factory->workers = 350;
         break;
-    case 15:
-        factory->outputs[factoryType] = 1.7; // uranium oxide/day
+    case uranium_oxide:
+        factory->outputs[uranium_oxide] = 1.7; // uranium oxide/day
 
-        factory->inputs[8] = 36.0;
+        factory->inputs[uranium_ore] = 36.0;
 
         factory->workers = 60;
         factory->university_workers = 15;
         break;
-    case 16:
-        factory->outputs[factoryType] = 0.82; // crops/day
+    case crops:
+        factory->outputs[crops] = 0.82; // crops/day
 
-        factory->inputs[27] = 1.5; // 3 vehicles estimate consumption
+        factory->inputs[fuel] = 1.5; // 3 vehicles estimate consumption
         break;
-    case 17:
-        factory->outputs[factoryType] = 0.81; // chemicals/day
+    case chemicals:
+        factory->outputs[chemicals] = 0.81; // chemicals/day
 
-        factory->inputs[0] = 0.72;
-        factory->inputs[12] = 0.82;
-        factory->inputs[16] = 0.78;
-        factory->inputs[26] = 1.2;
-        factory->inputs[39] = 10.0;
+        factory->inputs[gravel] = 0.72;
+        factory->inputs[wood] = 0.82;
+        factory->inputs[crops] = 0.78;
+        factory->inputs[oil] = 1.2;
+        factory->inputs[water] = 10.0;
 
         factory->workers = 60;
         break;
-    case 18:
-        factory->outputs[factoryType] = 5.0; // fabric/day
+    case fabric:
+        factory->outputs[fabric] = 5.0; // fabric/day
 
-        factory->inputs[16] = 20.0;
-        factory->inputs[17] = 0.5;
-        factory->inputs[39] = 11.0;
+        factory->inputs[crops] = 20.0;
+        factory->inputs[chemicals] = 0.5;
+        factory->inputs[water] = 11.0;
 
         factory->workers = 100;
         break;
-    case 19:
-        factory->outputs[factoryType] = 1.2; // clothes/day
+    case clothes:
+        factory->outputs[clothes] = 1.2; // clothes/day
 
-        factory->inputs[18] = 2.4;
+        factory->inputs[fabric] = 2.4;
 
         factory->workers = 80;
         break;
-    case 20:
-        factory->outputs[factoryType] = 6.0; // alcohol/day
+    case alcohol:
+        factory->outputs[alcohol] = 6.0; // alcohol/day
 
-        factory->inputs[16] = 30.0;
-        factory->inputs[39] = 13.0;
+        factory->inputs[crops] = 30.0;
+        factory->inputs[water] = 13.0;
 
         factory->workers = 100;
         break;
-    case 21:
-        factory->outputs[factoryType] = 20.0; // food/day
+    case food:
+        factory->outputs[food] = 20.0; // food/day
 
-        factory->inputs[39] = 8.5;  // water/day needed
-        factory->inputs[16] = 42.0; // crops/day needed
+        factory->inputs[water] = 8.5;  // water/day needed
+        factory->inputs[crops] = 42.0; // crops/day needed
 
         factory->workers = 170;
         break;
-    case 22:
-        factory->outputs[factoryType] = 6.6; // plastics/day
+    case plastics:
+        factory->outputs[plastics] = 6.6; // plastics/day
 
-        factory->inputs[17] = 3.0;
-        factory->inputs[26] = 27.0;
+        factory->inputs[chemicals] = 3.0;
+        factory->inputs[oil] = 27.0;
 
         factory->workers = 60;
         break;
-    case 23:
-        factory->outputs[factoryType] = 33.0; // mechanical components/day
+    case mechanical_components:
+        factory->outputs[mechanical_components] = 33.0; // mechanical components/day
 
-        factory->inputs[9] = 22.0;
-
-        factory->workers = 150;
-        break;
-    case 24:
-        factory->outputs[factoryType] = 3.4; // electronic components/day
-
-        factory->inputs[9] = 1.7;
-        factory->inputs[17] = 1.3;
-        factory->inputs[22] = 1.7;
+        factory->inputs[mechanical_components] = 22.0;
 
         factory->workers = 150;
         break;
-    case 25:
-        factory->outputs[factoryType] = 4.1; // electronics/day
+    case electronic_components:
+        factory->outputs[electronic_components] = 3.4; // electronic components/day
 
-        factory->inputs[23] = 1.7;
-        factory->inputs[24] = 1.7;
-        factory->inputs[22] = 2.5;
-        break;
-    case 26:
-        factory->outputs[factoryType] = 7.0; // oil/day
-        break;
-    case 27:
-        factory->outputs[27] = 125.0; // fuel/day
-        factory->outputs[28] = 75.0;  // bitumen/day
+        factory->inputs[mechanical_components] = 1.7;
+        factory->inputs[chemicals] = 1.3;
+        factory->inputs[plastics] = 1.7;
 
-        factory->inputs[26] = 250.0;
+        factory->workers = 150;
+        break;
+    case electronics:
+        factory->outputs[electronics] = 4.1; // electronics/day
+
+        factory->inputs[mechanical_components] = 1.7;
+        factory->inputs[electronic_components] = 1.7;
+        factory->inputs[plastics] = 2.5;
+        break;
+    case oil:
+        factory->outputs[oil] = 7.0; // oil/day
+        break;
+    case fuel:
+        factory->outputs[fuel] = 125.0; // fuel/day
+        factory->outputs[bitumen] = 75.0;  // bitumen/day
+
+        factory->inputs[oil] = 250.0;
 
         factory->workers = 500;
         break;
-    case 28:
-        newfactory(factory, 27); // bitumen is from the oil refinery
+    case bitumen:
+        newfactory(factory, fuel); // bitumen is from the oil refinery
         break;
-    case 29:
-        factory->outputs[factoryType] = 33.0; // aluminium oxide/day
+    case aluminium_oxide:
+        factory->outputs[aluminium_oxide] = 33.0; // aluminium oxide/day
 
-        factory->inputs[39] = 29.0;
-        factory->inputs[17] = 2.6;
-        factory->inputs[3] = 29.0;
-        factory->inputs[7] = 77.0;
+        factory->inputs[water] = 29.0;
+        factory->inputs[chemicals] = 2.6;
+        factory->inputs[coal] = 29.0;
+        factory->inputs[bauxite] = 77.0;
 
         factory->workers = 370;
         break;
-    case 30:
+    case asphalt:
         // asphalt plant I dialed back the numbers a bit because no one uses it 100% of the time, come on
-        factory->outputs[factoryType] = 145.0 / 4.0; // asphalt/day
+        factory->outputs[asphalt] = 145.0 / 4.0; // asphalt/day
 
-        factory->inputs[28] = 20.0 / 4.0;
-        factory->inputs[0] = 120.0 / 4.0;
+        factory->inputs[bitumen] = 20.0 / 4.0;
+        factory->inputs[gravel] = 120.0 / 4.0;
 
         factory->workers = 5;
         break;
-    case 31:
-        factory->outputs[factoryType] = 81.0; // cement/day
+    case cement:
+        factory->outputs[cement] = 81.0; // cement/day
 
-        factory->inputs[3] = 22.0;
-        factory->inputs[0] = 210.0;
+        factory->inputs[coal] = 22.0;
+        factory->inputs[gravel] = 210.0;
 
         factory->workers = 30;
         break;
-    case 32:
+    case concrete:
         // same case as asphalt plant
-        factory->outputs[factoryType] = 175.0 / 4.0; // concrete/day
+        factory->outputs[concrete] = 175.0 / 4.0; // concrete/day
 
-        factory->inputs[39] = 85.0 / 4.0;
-        factory->inputs[31] = 30.0 / 4.0;
-        factory->inputs[0] = 135.0 / 4.0;
+        factory->inputs[water] = 85.0 / 4.0;
+        factory->inputs[cement] = 30.0 / 4.0;
+        factory->inputs[gravel] = 135.0 / 4.0;
 
         factory->workers = 5;
         break;
-    case 33:
-        factory->outputs[factoryType] = 5.0; // livestock/day
+    case livestock:
+        factory->outputs[livestock] = 5.0; // livestock/day
 
-        factory->inputs[16] = 10.0;
-
-        factory->workers = 50;
-        break;
-    case 34:
-        factory->outputs[factoryType] = 60.0; // meat/day
-
-        factory->inputs[33] = 150.0;
+        factory->inputs[crops] = 10.0;
 
         factory->workers = 50;
         break;
-    case 35:
-        factory->outputs[factoryType] = 0.095; // nuclear fuel/day
+    case meat:
+        factory->outputs[meat] = 60.0; // meat/day
 
-        factory->inputs[37] = 0.4;
-        factory->inputs[17] = 0.75;
+        factory->inputs[livestock] = 150.0;
+
+        factory->workers = 50;
+        break;
+    case nuclear_fuel:
+        factory->outputs[nuclear_fuel] = 0.095; // nuclear fuel/day
+
+        factory->inputs[uf6] = 0.4;
+        factory->inputs[chemicals] = 0.75;
 
         factory->workers = 50;
         factory->university_workers = 70;
         break;
-    case 36:
+    case nuclear_waste:
         // nuclear waste factory? lmao
         break;
-    case 37:
-        factory->outputs[factoryType] = 0.96; // UF6/day
+    case uf6:
+        factory->outputs[uf6] = 0.96; // UF6/day
 
-        factory->inputs[17] = 0.21;
-        factory->inputs[15] = 2.0;
+        factory->inputs[chemicals] = 0.21;
+        factory->inputs[uranium_oxide] = 2.0;
 
         factory->workers = 80;
         factory->university_workers = 40;
         break;
-    case 38:
+    case power:
         // power factory? (future power plant calculation?)
         break;
-    case 39:
-        factory->outputs[factoryType] = 200.0; // water/day estimate idk
+    case water:
+        factory->outputs[water] = 200.0; // water/day estimate idk
 
-        factory->inputs[17] = 0.5; // chemicals
+        factory->inputs[chemicals] = 0.5; // chemicals
         factory->workers = 15;
         break;
     default:
@@ -437,7 +434,7 @@ int checkratio(double *ratio)
 
 int calculate(struct factory *factory, double amount, struct factory *resource_pool, double *factory_count, char resourceNames[][64], int *worker_population, int *university_worker_population, double *sewage)
 {
-    *sewage += factory->inputs[39];
+    *sewage += factory->inputs[water];
     for (int i = 0; i < RESOURCE_COUNT; i++)
     {
         resource_pool->inputs[i] -= factory->inputs[i] * amount;
@@ -479,7 +476,7 @@ int results(struct factory *resource_pool, double *factory_count, char resourceN
             printf("%s:\n  Amount: %f\n  Factory Count: %f\n", resourceNames[i], resource_pool->inputs[i], factory_count[i]);
         }
     }
-    if (resource_pool->inputs[39] > 0.0)
+    if (resource_pool->inputs[water] > 0.0)
     {
         printf("\nIndustry-made sewage to take care of: %f\n", *sewage);
     }

@@ -1,6 +1,93 @@
 #ifndef VARS_H
 #define VARS_H
+
 #define RESOURCE_COUNT 40
+
+// CONSUMPTION PER WORKER PER YEAR
+// got this data from https://steamcommunity.com/app/784150/discussions/0/3454842150489701958/
+
+// I also put a number bigger than the actual estimates so that
+// production is always more than consumption
+
+#define WORKER_FOOD 0.17
+#define WORKER_MEAT 0.038
+#define WORKER_CLOTHES 0.005
+
+// this estimate I don't have much basis on
+// (got it from a ratio I made from a dude's reply in that steam link)
+#define WORKER_ELECTRONICS 0.0085
+
+enum resource_ids
+{
+    gravel,
+    stone,
+    coal_ore,
+    coal,
+    iron_ore,
+    iron,
+    bauxite_ore,
+    bauxite,
+    uranium_ore,
+
+    // Open Storage
+    steel,
+    prefab,
+    brick,
+    wood,
+    board,
+    aluminium,
+    uranium_oxide,
+
+    // Warehouse
+    crops,
+    chemicals,
+    fabric,
+    clothes,
+    alcohol,
+    food,
+    plastics,
+    mechanical_components,
+    electronic_components,
+    electronics,
+
+    // Liquids
+    oil,
+    fuel,
+    bitumen,
+
+    // Other
+    aluminium_oxide,
+    asphalt,
+    cement,
+    concrete,
+    livestock,
+    meat,
+    nuclear_fuel,
+    nuclear_waste,
+    uf6,
+
+    // Specific inputs
+    power,
+    water,
+
+    // garbage
+    bio_waste,
+    metal_scrap,
+    aluminium_scrap,
+    construction_waste,
+    plastic_waste,
+    hazardous_waste,
+    burnable_waste,
+    burnable_waste,
+    other_waste,
+    ash,
+
+    // None
+    none,
+
+    // list
+    list
+};
 
 struct factory
 {
@@ -10,57 +97,3 @@ struct factory
     int university_workers;
 };
 #endif
-
-/* RESOURCE LIST/ARRAY
-// Aggregates
-0     gravel;
-1     stone;
-2     coal ore;
-3     coal;
-4     iron ore;
-5     iron;
-6     bauxite_ore;
-7     bauxite;
-8     uranium_ore;
-
-    // Open Storage
-9     steel;
-10     prefab;
-11     brick;
-12     wood;
-13     board;
-14     aluminium;
-15     uranium_oxide;
-
-    // Warehouse
-16     crops;
-17     chemicals;
-18     fabric;
-19     clothes;
-20     alcohol;
-21     food;
-22     plastics;
-23     mechanical_components;
-24     electronic_components;
-25     electronics;
-
-    // Liquids
-26     oil;
-27     fuel;
-28     bitumen;
-
-    // Other
-29     aluminium_oxide;
-30     asphalt;
-31     cement;
-32     concrete;
-33     livestock;
-34     meat;
-35     nuclear_fuel;
-36     nuclear_waste;
-37     uf6;
-
-    // Specific inputs
-38     power;
-39     water;
-*/
