@@ -78,7 +78,6 @@ enum resource_ids
     plastic_waste,
     hazardous_waste,
     burnable_waste,
-    burnable_waste,
     other_waste,
     ash,
 
