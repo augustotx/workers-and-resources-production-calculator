@@ -78,7 +78,6 @@ int main()
         }
         printf("\nType in a valid amount (bigger than 0)\n");
     }
-    free(str);
 
     newfactory(factory, type);
     calculate(factory, amount, resource_pool, factory_count, resourceNames, &worker_population, &university_worker_population, sewage);
@@ -86,6 +85,7 @@ int main()
     free(factory);
     free(resource_pool);
     free(sewage);
-
+    input("\nPress enter/return to quit\n-> ", str, 15);
+    free(str);
     return 0;
 }
