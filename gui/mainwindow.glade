@@ -1,0 +1,490 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Generated with glade 3.38.2 
+
+Copyright (C) 
+
+This file is part of .
+
+ is free software: you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation, either version 3 of the License, or
+(at your option) any later version.
+
+ is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with .  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<interface>
+  <requires lib="gtk+" version="3.24"/>
+  <!-- interface-license-type gplv3 -->
+  <object class="GtkAdjustment" id="factory_adjustment">
+    <property name="upper">999</property>
+    <property name="step-increment">1</property>
+    <property name="page-increment">10</property>
+  </object>
+  <object class="GtkListStore" id="resources_list">
+    <columns>
+      <!-- column-name id -->
+      <column type="gint64"/>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name selectable -->
+      <column type="gboolean"/>
+    </columns>
+    <data>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">-- Aggregates --</col>
+        <col id="2">False</col>
+      </row>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">Gravel</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">1</col>
+        <col id="1" translatable="yes">Stone</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">2</col>
+        <col id="1" translatable="yes">Coal ore</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">3</col>
+        <col id="1" translatable="yes">Coal</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">4</col>
+        <col id="1" translatable="yes">Iron ore</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">5</col>
+        <col id="1" translatable="yes">Iron</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">6</col>
+        <col id="1" translatable="yes">Bauxite ore</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">7</col>
+        <col id="1" translatable="yes">Bauxite</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">8</col>
+        <col id="1" translatable="yes">Uranium ore</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">-- Open Storage --</col>
+        <col id="2">False</col>
+      </row>
+      <row>
+        <col id="0">9</col>
+        <col id="1" translatable="yes">Steel</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">10</col>
+        <col id="1" translatable="yes">Prefab</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">11</col>
+        <col id="1" translatable="yes">Brick</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">12</col>
+        <col id="1" translatable="yes">Wood</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">13</col>
+        <col id="1" translatable="yes">Board</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">14</col>
+        <col id="1" translatable="yes">Aluminium</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">15</col>
+        <col id="1" translatable="yes">Uranium oxide</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">-- Warehouse --</col>
+        <col id="2">False</col>
+      </row>
+      <row>
+        <col id="0">16</col>
+        <col id="1" translatable="yes">Crops</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">17</col>
+        <col id="1" translatable="yes">Chemicals</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">18</col>
+        <col id="1" translatable="yes">Fabric</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">19</col>
+        <col id="1" translatable="yes">Clothes</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">20</col>
+        <col id="1" translatable="yes">Alcohol</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">21</col>
+        <col id="1" translatable="yes">Food</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">22</col>
+        <col id="1" translatable="yes">Plastics</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">23</col>
+        <col id="1" translatable="yes">Mechanical components</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">24</col>
+        <col id="1" translatable="yes">Electronic components</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">25</col>
+        <col id="1" translatable="yes">Electronics</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">-- Liquids --</col>
+        <col id="2">False</col>
+      </row>
+      <row>
+        <col id="0">26</col>
+        <col id="1" translatable="yes">Oil</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">27</col>
+        <col id="1" translatable="yes">Fuel</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">28</col>
+        <col id="1" translatable="yes">Bitumen</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">-- Other --</col>
+        <col id="2">False</col>
+      </row>
+      <row>
+        <col id="0">29</col>
+        <col id="1" translatable="yes">Aluminium oxide</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">30</col>
+        <col id="1" translatable="yes">Asphalt</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">31</col>
+        <col id="1" translatable="yes">Cement</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">32</col>
+        <col id="1" translatable="yes">Concrete</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">33</col>
+        <col id="1" translatable="yes">Livestock</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">34</col>
+        <col id="1" translatable="yes">Meat</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">35</col>
+        <col id="1" translatable="yes">Nuclear fuel</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">36</col>
+        <col id="1" translatable="yes">Nuclear waste</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">37</col>
+        <col id="1" translatable="yes">UF6</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">0</col>
+        <col id="1" translatable="yes">-- Specific Inputs --</col>
+        <col id="2">False</col>
+      </row>
+      <row>
+        <col id="0">38</col>
+        <col id="1" translatable="yes">Power</col>
+        <col id="2">True</col>
+      </row>
+      <row>
+        <col id="0">39</col>
+        <col id="1" translatable="yes">Water</col>
+        <col id="2">True</col>
+      </row>
+    </data>
+  </object>
+  <object class="GtkListStore" id="result_list">
+    <columns>
+      <!-- column-name name -->
+      <column type="gchararray"/>
+      <!-- column-name amount -->
+      <column type="gdouble"/>
+      <!-- column-name factories -->
+      <column type="guint"/>
+    </columns>
+  </object>
+  <object class="GtkWindow" id="main_window">
+    <property name="can-focus">False</property>
+    <property name="title" translatable="yes">Workers &amp; Resources Calculator</property>
+    <property name="role">main</property>
+    <property name="default-width">320</property>
+    <property name="default-height">480</property>
+    <child>
+      <!-- n-columns=2 n-rows=8 -->
+      <object class="GtkGrid" id="main_grid">
+        <property name="visible">True</property>
+        <property name="can-focus">False</property>
+        <property name="orientation">vertical</property>
+        <property name="row-spacing">2</property>
+        <property name="column-spacing">2</property>
+        <child>
+          <object class="GtkLabel" id="calculated_resource_label">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">end</property>
+            <property name="margin-start">8</property>
+            <property name="label" translatable="yes">Select resource:</property>
+            <property name="justify">right</property>
+            <property name="xalign">1</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="factory_number_label">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="halign">end</property>
+            <property name="margin-start">8</property>
+            <property name="label" translatable="yes">Number of factories:</property>
+            <property name="justify">right</property>
+            <property name="xalign">1</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSpinButton" id="factory_number_spin">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="hexpand">True</property>
+            <property name="progress-pulse-step">1</property>
+            <property name="input-purpose">digits</property>
+            <property name="adjustment">factory_adjustment</property>
+            <property name="numeric">True</property>
+            <property name="update-policy">if-valid</property>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">1</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkTreeView" id="resource_list_view">
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="vexpand">True</property>
+            <property name="model">result_list</property>
+            <property name="search-column">0</property>
+            <property name="enable-grid-lines">both</property>
+            <child internal-child="selection">
+              <object class="GtkTreeSelection"/>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="resource_list_name">
+                <property name="title" translatable="yes" context="Output resource name">Resource</property>
+                <property name="sort-indicator">True</property>
+                <property name="sort-column-id">0</property>
+                <child>
+                  <object class="GtkCellRendererText" id="resource_list_name_renderer"/>
+                  <attributes>
+                    <attribute name="text">0</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="resource_list_amount">
+                <property name="title" translatable="yes">Amount</property>
+                <property name="sort-indicator">True</property>
+                <property name="sort-order">descending</property>
+                <property name="sort-column-id">1</property>
+                <child>
+                  <object class="GtkCellRendererSpin" id="resource_list_amount_renderer"/>
+                  <attributes>
+                    <attribute name="text">1</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+            <child>
+              <object class="GtkTreeViewColumn" id="resource_list_factories">
+                <property name="title" translatable="yes">Factories</property>
+                <property name="sort-indicator">True</property>
+                <property name="sort-order">descending</property>
+                <property name="sort-column-id">2</property>
+                <child>
+                  <object class="GtkCellRendererSpin" id="resource_list_factories_renderer"/>
+                  <attributes>
+                    <attribute name="text">2</attribute>
+                  </attributes>
+                </child>
+              </object>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">5</property>
+            <property name="width">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="results_header_label">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="ypad">4</property>
+            <property name="label" translatable="yes">Results</property>
+            <property name="justify">center</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">4</property>
+            <property name="width">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="workers_label">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Workers required: %d + %d with higher education</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">6</property>
+            <property name="width">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkLabel" id="waste_label">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="label" translatable="yes">Sewage amount: %f m3</property>
+            <property name="xalign">0</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">7</property>
+            <property name="width">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkComboBox" id="calculated_resource_combobox">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="hexpand">True</property>
+            <property name="model">resources_list</property>
+            <property name="active">1</property>
+            <property name="id-column">1</property>
+            <child>
+              <object class="GtkCellRendererText" id="calculated_resource_combobox_menu"/>
+              <attributes>
+                <attribute name="sensitive">2</attribute>
+                <attribute name="text">1</attribute>
+              </attributes>
+            </child>
+          </object>
+          <packing>
+            <property name="left-attach">1</property>
+            <property name="top-attach">0</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkSeparator" id="calculated_gap">
+            <property name="visible">True</property>
+            <property name="can-focus">False</property>
+            <property name="margin-top">8</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">3</property>
+            <property name="width">2</property>
+          </packing>
+        </child>
+        <child>
+          <object class="GtkButton" id="start_button">
+            <property name="label" translatable="yes">Calculate</property>
+            <property name="visible">True</property>
+            <property name="can-focus">True</property>
+            <property name="receives-default">True</property>
+          </object>
+          <packing>
+            <property name="left-attach">0</property>
+            <property name="top-attach">2</property>
+            <property name="width">2</property>
+          </packing>
+        </child>
+      </object>
+    </child>
+  </object>
+</interface>
