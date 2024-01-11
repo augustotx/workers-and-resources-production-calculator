@@ -9,3 +9,4 @@ int newfactory(struct factory *, enum resource_ids);
 int checkratio(double *);
 int calculate(struct factory *, double, struct factory *, double *, char[][64], int *, int *, double *);
 int results(struct factory *, double *, char[][64], int *, int *, double *);
+int terminal_init();

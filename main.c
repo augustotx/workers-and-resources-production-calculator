@@ -28,7 +28,11 @@
 
 int main(int argc, char **argv)
 {
+    if (isatty(fileno(stdin))) {
+        terminal_init();
+    } else {
+        gui_init();
+    }
     // All the main code is moved to gui/guifuncs.c
-    gui_init();
     return 0;
 }
