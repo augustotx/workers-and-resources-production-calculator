@@ -13,7 +13,7 @@ Production Calculator for the game Workers and Resources: Soviet Republic progra
 
 ### Windows
 
-Despite the game being Windows on, the build process is meant for Linux,
+Despite the game being Windows only, the build process is meant for Linux,
 so you need a Linux-like environment in order to successfully build it.
 You can build this project for Windows using one of these options:
 
