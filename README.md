@@ -2,22 +2,18 @@
 
 Production Calculator for the game Workers and Resources: Soviet Republic programmed in C.
 
-Honestly, I don't even know if this program is correct, but I hope it is lol
-
 ## Build project
 
 ### Linux
 
 1. Install GCC, make and GTK 3 (ìf you don't have them)
 2. Clone this repository into a directory using Git
-3. Run `make` in the repository directory. The build results will be contained within `bin` subdirectory.
-4. Move `soviet-calc` and `gui` directory to wherever you want (**They should be together in the same place!**)
-5. Run `./soviet-calc` to check the built program
-6. Run `make clean` if you want to clean up the built exectables from the `bin` subdirectory
+3. Run the build script: `./build-linux`.
+4. There should now be a file called `soviet-calc`. That's the program.
 
 ### Windows
 
-Despite the game is natively provided only for Windows, the build process is meant for Linux,
+Despite the game being Windows on, the build process is meant for Linux,
 so you need a Linux-like environment in order to successfully build it.
 You can build this project for Windows using one of these options:
 
@@ -43,7 +39,7 @@ Just run launch your Linux/MSYS terminal and follow the instructions from the "L
 
 To run it, compile it with GCC and run the executable. There's a build script which you can modify for your own uses.
 
-You can also just download it from the releases tab, but I wouldn't recommend it because I pretend to change it all the time, and I don't really know much about releases on GitHub.
+You can also just download it from the [releases tab](https://github.com/augustopereiratx/workers-and-resources-production-calculator/releases).
 
 ## License
 
@@ -51,10 +47,14 @@ The code is free and open source. You can download it, run it, modify it and red
 
 ## Stuff I haven't done yet
 
-Right now basically everything works. You can calculate every factory's production line from top to bottom. The next thing is to put vehicle production chains. I also want to calculate if the production chain is enough for the amount of workers it requires (e.g. if food production sustains the workers it requires and if there's anything remaining, as well as how many remaining workers that food factory can feed).
+Right now basically everything works. You can calculate every factory's production line from top to bottom. The next thing is to put vehicle production chains.
+
+I also want to calculate if the production chain is enough for the amount of workers it requires (e.g. if food production sustains the workers it requires and if there's anything remaining, as well as how many remaining workers that food factory can feed).
+
+There is also sewage to be done still.
 
 ## Program usage
 
 1. Choose a resource you want to produce and number of factories you want to build for it.
-2. Click button "Calculate".
-3. Number of factories and workers required to build up the production chain will be displayed in the below table.
+2. Click button "Calculate" or follow terminal instructions.
+3. Number of factories and workers required to build up the production chain will be displayed on a table below or on the terminal.

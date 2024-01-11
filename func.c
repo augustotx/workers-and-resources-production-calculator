@@ -552,7 +552,6 @@ int terminal_init()
     free(factory);
     free(resource_pool);
     free(sewage);
-    input("\nPress enter/return to quit\n-> ", str, 15);
     free(str);
     return 0;
 }
