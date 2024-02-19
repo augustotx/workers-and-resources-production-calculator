@@ -28,10 +28,14 @@
 
 int main(int argc, char **argv)
 {
-    if (isatty(fileno(stdin))) {
-        terminal_init();
+    // First, check if the program was run with the "--gui" argument
+    if (argc > 1 && strcmp(argv[1], "--gui") == 0) {
+        gui_init(); // Initialize GUI mode
+    } else if (isatty(fileno(stdin))) {
+        terminal_init(); // Initialize terminal mode if stdin is a terminal
     } else {
-        gui_init();
+        // If stdin is not a terminal and "--gui" was not specified
+        terminal_init();
     }
     // All the main code is moved to gui/guifuncs.c
     return 0;
