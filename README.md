@@ -11,6 +11,13 @@ Production Calculator for the game Workers and Resources: Soviet Republic progra
 3. Run the build script: `./build-linux`.
 4. There should now be a file called `soviet-calc`. That's the program.
 
+### Mac OS
+
+1. Install dependencies, e.g. using the homebrew installer: `brew install gtk+3`, `brew install pkg-config`
+3. Clone this repository into a directory using Git (or simply download the project files)
+4. Run `make` in the terminal from the root project directory.
+5. There should now be a file called `soviet-calc` in `./bin`, which you can run: `./bin/soviet-calc'
+
 ### Windows
 
 Despite the game being Windows only, the build process is meant for Linux,
